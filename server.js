@@ -44,10 +44,12 @@ io.on('connection', ()=>{
 	console.log('a user is connected');
 });
 
-mongoose.connect(dbUrl ,{useMongoClient : true} ,(err)=>{
+mongoose.connect(dbUrl , {useMongoClient: true}, (err)=>{
 	console.log('mongodb connected', err);
 });
 
-var server = http.listen(3000, ()=>{
+const PORT = process.env.PORT || 3000;
+var server = http.listen(PORT, ()=>{
 	console.log('server is running on port', server.address().port);
 });
+
