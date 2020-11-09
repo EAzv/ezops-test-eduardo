@@ -27,7 +27,7 @@ app.post('/messages', (req, res)=>{
 	message.save((err)=>{
 		if(err)
 			res.sendStatus(500);
-		io.emit('message', req.body);
+		io.emit('message', message);
 		res.sendStatus(200);
 	});
 });
