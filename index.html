@@ -43,7 +43,7 @@
 			socket.on('message', addMessages);
 		});
 
-		var location_host = window.location.host;
+		var location_host = window.location.protocol+'//'+window.location.host;
 
 		function addMessages (message) {
 			$('#messages').append(`
