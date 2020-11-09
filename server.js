@@ -26,8 +26,16 @@ app.post('/messages', (req, res)=>{
 	var message = new Message(req.body);
 	message.save((err)=>{
 		if(err)
-			sendStatus(500);
+			res.sendStatus(500);
 		io.emit('message', req.body);
+		res.sendStatus(200);
+	});
+});
+
+app.get('/messages/delete/:msg_id', (req, res)=>{
+	Message.remove({_id: req.params.msg_id}, (err)=>{
+		if (err)
+			res.sendStatus(500);
 		res.sendStatus(200);
 	});
 });

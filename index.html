@@ -31,6 +31,12 @@
 					message:$('#message').val()
 				});
 			});
+
+			$('body').on('click', 'a[data-message]', (ev)=>{
+				ev.preventDefault();
+				deleteMessage($(ev.target).data('message'));
+			});
+
 			getMessages()
 
 			var socket = io();
@@ -39,8 +45,12 @@
 
 		function addMessages (message) {
 			$('#messages').append(`
-				<h4> ${message.name} </h4>
-				<p>  ${message.message} </p>`);
+				<div id="messagewrap_${message._id}">
+					<h4> ${message.name} </h4>
+					<p>  ${message.message} </p>
+					<a href="#" data-message="${message._id}">Delete</a>
+				</div>
+			`);
 		}
 
 		function getMessages () {
@@ -51,6 +61,12 @@
 
 		function sendMessage (message) {
 			$.post('http://localhost:3000/messages', message);
+		}
+
+		function deleteMessage (message_id) {
+			$.get('http://localhost:3000/messages/delete/'+ message_id, (res)=>{
+				$('#messagewrap_'+ message_id).hide();
+			});
 		}
 	</script>
 </body>
