@@ -34,8 +34,8 @@ app.post('/messages', (req, res)=>{
 
 app.get('/messages/delete/:msg_id', (req, res)=>{
 	Message.remove({_id: req.params.msg_id}, (err)=>{
-		if (err)
-			res.sendStatus(500);
+		 if (err)
+			throw err;
 		res.sendStatus(200);
 	});
 });

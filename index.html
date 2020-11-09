@@ -22,6 +22,7 @@
 		</div>
 		<div id="messages">
 		</div>
+		<hr><hr><hr>
 	</div>
 	<script>
 		$(function(){
@@ -47,10 +48,14 @@
 
 		function addMessages (message) {
 			$('#messages').append(`
-				<div id="messagewrap_${message._id}">
-					<h4> ${message.name} </h4>
-					<p>  ${message.message} </p>
-					<a href="#" data-message="${message._id}">Delete</a>
+				<div id="messagewrap_${message._id}" class="card" style="margin: 12px 0 24px;">
+					<div class="card-header">
+						<h5>${message.name}</h5>
+						<a href="#" data-message="${message._id}" class="btn btn-danger btn-sm" style="position:absolute;right: 12px;top: 12px;">Delete</a>
+					</div>
+					<div class="card-body">
+						<p class="card-text">${message.message}</p>
+					</div>
 				</div>
 			`);
 		}
