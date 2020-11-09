@@ -43,6 +43,8 @@
 			socket.on('message', addMessages);
 		});
 
+		var location_host = window.location.host;
+
 		function addMessages (message) {
 			$('#messages').append(`
 				<div id="messagewrap_${message._id}">
@@ -54,17 +56,17 @@
 		}
 
 		function getMessages () {
-			$.get('http://localhost:3000/messages', (data)=>{
+			$.get(location_host+'/messages', (data)=>{
 				data.forEach(addMessages);
 			});
 		}
 
 		function sendMessage (message) {
-			$.post('http://localhost:3000/messages', message);
+			$.post(location_host+'/messages', message);
 		}
 
 		function deleteMessage (message_id) {
-			$.get('http://localhost:3000/messages/delete/'+ message_id, (res)=>{
+			$.get(location_host+'/messages/delete/'+ message_id, (res)=>{
 				$('#messagewrap_'+ message_id).hide();
 			});
 		}
