@@ -14,7 +14,7 @@ var Message = mongoose.model('Message', {
 	message : String
 });
 
-var dbUrl = 'mongodb+srv://app-user-1:Wo02LGz2YM@cluster0.xikif.mongodb.net/simple-chat?retryWrites=true&w=majority';
+var dbUrl = process.env.MONGO_ADDRESS;
 
 app.get('/messages', (req, res)=>{
 	Message.find({},(err, messages)=>{
@@ -51,5 +51,6 @@ mongoose.connect(dbUrl , {useMongoClient: true}, (err)=>{
 const PORT = process.env.PORT || 3000;
 var server = http.listen(PORT, ()=>{
 	console.log('server is running on port', server.address().port);
+	console.log('Mongo is running on address', dbUrl);
 });
 
